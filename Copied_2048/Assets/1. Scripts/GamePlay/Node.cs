@@ -7,17 +7,11 @@ namespace Puzzle_2048
     [RequireComponent(typeof(Image))]
     public class Node : MonoBehaviour
     {
-
-
         public bool isEmpty => value == 0;
 
         private void Awake()
         {            
-            _image = GetComponent<Image>();            
-        }
-
-        private void Update()
-        {            
+            _image = GetComponent<Image>();        
         }
 
         public int value
@@ -41,7 +35,7 @@ namespace Puzzle_2048
 
         public int _value;
         public event Action<Node, int> onValueChanged;
-        public Animator animator;        
-        private Image _image;        
+        public Animator animator;
+        private Image _image;
     }
 }

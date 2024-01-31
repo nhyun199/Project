@@ -5,7 +5,7 @@ namespace Puzzle_2048
     public class BackgroundMusicController : MonoBehaviour
     {
         private AudioSource audioSource;
-
+            
         private void Start()
         {
             audioSource = GetComponent<AudioSource>();

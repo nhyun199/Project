@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 namespace Puzzle_2048
-{
+{   
     public class UIScoreHandler : MonoBehaviour
     {
         public InputField initialsInputField;

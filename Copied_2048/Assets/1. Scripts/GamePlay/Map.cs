@@ -64,7 +64,6 @@ namespace Puzzle_2048
                 if (node.isEmpty)
                 {
                     nodesEmpty.AddLast(node);
-                    //Debug.Log($"Node {node.name}이(가) nodesEmpty 리스트에 추가됨");
                 }
             }
         }
@@ -101,9 +100,7 @@ namespace Puzzle_2048
                 isAnimating = true;
                 node.animator.SetTrigger("Spawn");
                 StartCoroutine(DelaySpawn2(node, 0.3f));
-                StartCoroutine(Animating(1.0f));
-                //StartCoroutine(Animating(0.1f));
-
+                StartCoroutine(Animating(1.0f));              
             }
 
             if (TryRandomSpawn(out Node node2))
@@ -111,9 +108,7 @@ namespace Puzzle_2048
                 isAnimating = true;
                 node2.animator.SetTrigger("Spawn");
                 StartCoroutine(DelaySpawn4(node2, 0.3f));
-                StartCoroutine(Animating(1.0f));
-                //StartCoroutine(Animating(0.1f));
-
+                StartCoroutine(Animating(1.0f));                
             }
         } // 게임 시작 시 2, 2 블록 또는 2, 4 블록을 생성함
 
@@ -124,26 +119,21 @@ namespace Puzzle_2048
                 isAnimating = true;
                 node.animator.SetTrigger("Spawn");
                 StartCoroutine(DelaySpawn2(node, 0.3f));
-                StartCoroutine(Animating(1.0f));
-                //StartCoroutine(Animating(0.1f));
-
+                StartCoroutine(Animating(1.0f));               
             }
         } // 방향키를 눌렀을 때 랜덤으로 2 블록을 생성함
 
-        private bool TryRandomSpawn(out Node node) // 랜덤으로 블록을 생성할 위치를 선정하고 시도함
+        private bool TryRandomSpawn(out Node node) 
         {
-
             node = nodesEmpty.OrderBy(x => Guid.NewGuid())
                              .FirstOrDefault();
 
             if (node != null)
-            {
-                //node.animator.SetTrigger("Spawn");
+            {                
                 return true;
             }
             else
             {
-
                 return false;
             }
         }
@@ -170,8 +160,7 @@ namespace Puzzle_2048
                                 map[x, y].value = map[x, y1].value;
                                 map[x, y1].value = 0;
                                 moved = true;
-                                StartCoroutine(Animating(1.0f));
-                                //StartCoroutine(Animating(0.1f));
+                                StartCoroutine(Animating(1.0f));                                
                             }
 
                             else if (map[x, y].value == map[x, y1].value)
@@ -182,8 +171,7 @@ namespace Puzzle_2048
                                 _score += map[x, y].value;
                                 map[x, y].animator.SetTrigger("Combine");
                                 moved = true;
-                                StartCoroutine(Animating(1.0f));
-                                //StartCoroutine(Animating(0.1f));
+                                StartCoroutine(Animating(1.0f));                                
                                 break;
                             }
 
@@ -222,8 +210,7 @@ namespace Puzzle_2048
                                 map[x, y].value = map[x, y1].value;
                                 map[x, y1].value = 0;
                                 moved = true;
-                                StartCoroutine(Animating(1.0f));
-                                //StartCoroutine(Animating(0.1f));
+                                StartCoroutine(Animating(1.0f));                                
                             }
 
                             else if (map[x, y].value == map[x, y1].value)  // 값이 같으면 합칩니다.
@@ -234,8 +221,7 @@ namespace Puzzle_2048
                                 _score += map[x, y].value;
                                 map[x, y].animator.SetTrigger("Combine");
                                 moved = true;
-                                StartCoroutine(Animating(1.0f));
-                                //StartCoroutine(Animating(0.1f));
+                                StartCoroutine(Animating(1.0f));                                
                                 break;  // 하나의 노드는 한 번만 합칠 수 있습니다.
                             }
 
@@ -273,8 +259,7 @@ namespace Puzzle_2048
                                 map[x, y].value = map[x1, y].value;
                                 map[x1, y].value = 0;
                                 moved = true;
-                                StartCoroutine(Animating(1.0f));
-                                //StartCoroutine(Animating(0.1f));
+                                StartCoroutine(Animating(1.0f));                                
                             }
 
                             else if (map[x, y].value == map[x1, y].value)
@@ -285,8 +270,7 @@ namespace Puzzle_2048
                                 _score += map[x, y].value;
                                 map[x, y].animator.SetTrigger("Combine");
                                 moved = true;
-                                StartCoroutine(Animating(1.0f));
-                                //StartCoroutine(Animating(0.1f));
+                                StartCoroutine(Animating(1.0f));                                
                                 break;
                             }
 
@@ -323,8 +307,7 @@ namespace Puzzle_2048
                                 map[x, y].value = map[x1, y].value;
                                 map[x1, y].value = 0;
                                 moved = true;
-                                StartCoroutine(Animating(1.0f));
-                                //StartCoroutine(Animating(0.1f));
+                                StartCoroutine(Animating(1.0f));                                
                             }
 
                             else if (map[x, y].value == map[x1, y].value)
@@ -335,8 +318,7 @@ namespace Puzzle_2048
                                 _score += map[x, y].value;
                                 map[x, y].animator.SetTrigger("Combine");
                                 moved = true;
-                                StartCoroutine(Animating(1.0f));
-                                //StartCoroutine(Animating(0.1f));
+                                StartCoroutine(Animating(1.0f));                                
                                 break;
                             }
                             else
@@ -353,6 +335,7 @@ namespace Puzzle_2048
                 }
             }
             #endregion
+
         } // 블록의 이동과 결합
 
         public void GameOver()

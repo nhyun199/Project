@@ -18,7 +18,7 @@ namespace Puzzle_2048
         }
         private static BlockSpritesRepository _instance;
         private Sprite[] _sprites; // 2, 4, 8 .. 
-
+        
         public Sprite GetSprite(int value) // 2 블록 두 개 또는 2, 4 블록을 하나씩 가져와야함
         {
             return value > 0 ?
