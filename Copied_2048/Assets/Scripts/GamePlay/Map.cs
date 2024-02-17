@@ -160,7 +160,7 @@ namespace Puzzle_2048
                                 map[x, y].value = map[x, y1].value;
                                 map[x, y1].value = 0;
                                 moved = true;
-                                StartCoroutine(Animating(1.0f));                                
+                                StartCoroutine(Animating(1.0f));
                             }
 
                             else if (map[x, y].value == map[x, y1].value)
@@ -382,7 +382,6 @@ namespace Puzzle_2048
             }
         }
 
-
         #region Coroutine
         IEnumerator DelaySpawn2(Node node, float dalay)
         {
@@ -406,8 +405,6 @@ namespace Puzzle_2048
             isAnimating = false;
         }
         #endregion
-
-
 
     }
 }
