@@ -37,4 +37,4 @@
 3. 프로젝트 진행 후 자기 고찰
 <br>Link : [GoogleDrive](https://drive.google.com/drive/folders/1IAiJjDASdk-dd63kW-2EUfcaBKC8eVMn?usp=drive_link)
 4. 전체 플레이 영상
-<br>Link : [Youtube]()
+<br>Link : [Youtube](https://www.youtube.com/watch?v=nBMApKSholo)
