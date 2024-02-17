@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        Screen.SetResolution(360, 640, false);
         Spawn();
         Spawn();
         BestScore.text = PlayerPrefs.GetInt("BestScore").ToString();
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        // ESC ¹öÆ°À¸·Î °ÔÀÓ Á¾·á
+        // ESC ë²„íŠ¼ìœ¼ë¡œ ê²Œì„ ì¢…ë£Œ
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             Application.Quit();
@@ -30,7 +31,7 @@ public class GameManager : MonoBehaviour
 
         if (stop)
             return;
-                
+
         if (Input.GetMouseButtonDown(0))
         {
             wait = true;
@@ -49,17 +50,17 @@ public class GameManager : MonoBehaviour
             if (wait)
             {
                 Drag();
-                DisplayScoreAndCheckGameOver();                
+                DisplayScoreAndCheckGameOver();
             }
         }
     }
 
-    // °ÔÀÓ ½ÃÀÛ ½Ã Å¸ÀÏ ½ºÆù
+    // ê²Œì„ ì‹œì‘ ì‹œ íƒ€ì¼ ìŠ¤í°
     void Spawn()
     {
         while (true)
         {
-            x = Random.Range(0, 4); // intÇü º¯¼öÀÇ Random.Range(ÃÖ¼Ò°ª, ÃÖ´ë°ª)À» »ç¿ëÇÒ °æ¿ì ÃÖ¼Ú°ª ~ (ÃÖ´ñ°ª-1) À¸·Î ¹üÀ§°¡ Àû¿ë
+            x = Random.Range(0, 4); // intí˜• ë³€ìˆ˜ì˜ Random.Range(ìµœì†Œê°’, ìµœëŒ€ê°’)ì„ ì‚¬ìš©í•  ê²½ìš° ìµœì†Ÿê°’ ~ (ìµœëŒ“ê°’-1) ìœ¼ë¡œ ë²”ìœ„ê°€ ì ìš©
             y = Random.Range(0, 4);
             if (Square[x, y] == null)
                 break;
@@ -70,10 +71,10 @@ public class GameManager : MonoBehaviour
         Square[x, y].GetComponent<Animator>().SetTrigger("Spawn");
     }
 
-    // [x1, y1] -> ÀÌµ¿ Àü ÁÂÇ¥ / [x2, y2] -> ÀÌµ¿ ÈÄ ÁÂÇ¥
+    // [x1, y1] -> ì´ë™ ì „ ì¢Œí‘œ / [x2, y2] -> ì´ë™ í›„ ì¢Œí‘œ
     void MoveOrCombine(int x1, int y1, int x2, int y2)
     {
-        // ÀÌµ¿ °¡´É
+        // ì´ë™ ê°€ëŠ¥
         if (Square[x2, y2] == null && Square[x1, y1] != null)
         {
             move = true;
@@ -82,7 +83,7 @@ public class GameManager : MonoBehaviour
             Square[x1, y1] = null;
         }
 
-        // ¼ıÀÚ °°À» ¶§ °áÇÕ
+        // ìˆ«ì ê°™ì„ ë•Œ ê²°í•©
         if (Square[x1, y1] != null && Square[x2, y2] != null &&
             Square[x1, y1].name == Square[x2, y2].name &&
             Square[x1, y1].tag != "Combine" &&
@@ -105,11 +106,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void Drag()
+    // ë“œë˜ê·¸ ë¡œì§
+    void Drag() 
     {
         wait = false;
 
-        // À§·Î µå·¡±×
+        // ìœ„ë¡œ ë“œë˜ê·¸
         if (gap.y > 0 && gap.x > -0.5f && gap.x < 0.5f)
         {
             for (x = 0; x <= 3; x++)
@@ -118,7 +120,7 @@ public class GameManager : MonoBehaviour
                         MoveOrCombine(x, i - 1, x, i);
         }
 
-        // ¾Æ·¡·Î µå·¡±×
+        // ì•„ë˜ë¡œ ë“œë˜ê·¸
         else if (gap.y < 0 && gap.x > -0.5f && gap.x < 0.5f)
         {
             for (x = 0; x <= 3; x++)
@@ -127,7 +129,7 @@ public class GameManager : MonoBehaviour
                         MoveOrCombine(x, i + 1, x, i);
         }
 
-        // ¿À¸¥ÂÊÀ¸·Î µå·¡±×
+        // ì˜¤ë¥¸ìª½ìœ¼ë¡œ ë“œë˜ê·¸
         else if (gap.x > 0 && gap.y > -0.5f && gap.y < 0.5f)
         {
             for (y = 0; y <= 3; y++)
@@ -136,7 +138,7 @@ public class GameManager : MonoBehaviour
                         MoveOrCombine(i - 1, y, i, y);
         }
 
-        // ¿ŞÂÊÀ¸·Î µå·¡±×
+        // ì™¼ìª½ìœ¼ë¡œ ë“œë˜ê·¸
         else if (gap.x < 0 && gap.y > -0.5f && gap.y < 0.5f)
         {
             for (y = 0; y <= 3; y++)
@@ -148,6 +150,7 @@ public class GameManager : MonoBehaviour
         else return; // Drag
     }
 
+    // ì ìˆ˜ í‘œì‹œ ë° ê²Œì„ì˜¤ë²„ ì²´í¬
     void DisplayScoreAndCheckGameOver()
     {
         if (move)
@@ -157,7 +160,7 @@ public class GameManager : MonoBehaviour
             k = 0;
             l = 0;
 
-            // Á¡¼ö
+            // ì ìˆ˜
             if (score > 0)
             {
                 Plus.text = "+" + score.ToString() + "    ";
@@ -179,7 +182,7 @@ public class GameManager : MonoBehaviour
                 {
                     if (Square[x, y] == null)
                     {
-                        k++; // ¸ğµç Å¸ÀÏÀÌ °¡µæ Ã¡´Â Áö ÆÇ´ÜÇÔ
+                        k++; // ëª¨ë“  íƒ€ì¼ì´ ê°€ë“ ì°¼ëŠ” ì§€ íŒë‹¨í•¨
                         continue;
                     }
 
@@ -187,15 +190,15 @@ public class GameManager : MonoBehaviour
                         Square[x, y].tag = "Untagged";
                 }
 
-            if (k == 0) // ¸ğµç Å¸ÀÏÀÌ °¡µæ Ã¡À¸¹Ç·Î, °¡·Î¿Í ¼¼·Î¿¡ °°Àº ºí·ÏÀÌ ÀÖ´Â Áö Ã¼Å©ÇÔ
+            if (k == 0) // ëª¨ë“  íƒ€ì¼ì´ ê°€ë“ ì°¼ìœ¼ë¯€ë¡œ, ê°€ë¡œì™€ ì„¸ë¡œì— ê°™ì€ ë¸”ë¡ì´ ìˆëŠ” ì§€ ì²´í¬í•¨
             {
-                for (y = 0; y <= 3; y++) // °¡·Î °Ë»ç
+                for (y = 0; y <= 3; y++) // ê°€ë¡œ ê²€ì‚¬
                     for (x = 0; x <= 2; x++)
                     {
                         if (Square[x, y].name == Square[x + 1, y].name)
                             l++;
                     }
-                for (x = 0; x <= 3; x++) // ¼¼·Î °Ë»ç
+                for (x = 0; x <= 3; x++) // ì„¸ë¡œ ê²€ì‚¬
                     for (y = 0; y <= 2; y++)
                     {
                         if (Square[x, y].name == Square[x, y + 1].name)
@@ -212,7 +215,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void Restart() // °ÔÀÓ Àç½ÃÀÛ 
+    public void Restart() // ê²Œì„ ì¬ì‹œì‘ 
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
