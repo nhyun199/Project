@@ -3,6 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class Title : MonoBehaviour
 {
+    [SerializeField] GameObject accountCanvas;
+
     private void Start()
     {
         // 원하는 해상도로 설정
@@ -21,5 +23,15 @@ public class Title : MonoBehaviour
 
         // 게임 빌드 시
         Application.Quit();
+    }
+
+    public void OpenAccount()
+    {
+        accountCanvas.SetActive(true);
+    }
+
+    public void CloseAccount()
+    {
+        accountCanvas.SetActive(false);
     }
 }
